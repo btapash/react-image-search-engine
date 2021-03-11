@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const Load = ({photo,clientId }) => {
-
+const Load = ({changeResult,photo,clientId}) => {
+  
   const [result1, setResult1] = useState([]);
   const[start,setStart]=useState(2);
+  
 
   function handleSubmit(event) {
-    
-
+    changeResult();
     const url =
       "https://api.unsplash.com/search/photos?page="+start+"&per_page=8&orientation=landscape&query=" +
       photo +
@@ -17,6 +17,7 @@ const Load = ({photo,clientId }) => {
     axios.get(url).then((response) => {
       // console.log(response);
       setResult1(response.data.results);
+      
     });
     setStart(start+1);
   }
